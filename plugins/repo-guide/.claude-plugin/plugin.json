@@ -1,0 +1,8 @@
+{
+  "name": "repo-guide",
+  "description": "Get oriented in an unfamiliar codebase.",
+  "version": "1.0.0",
+  "author": {
+    "name": "behm"
+  }
+}
