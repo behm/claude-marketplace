@@ -12,7 +12,7 @@
 
 - [ ] `node scripts/validate.mjs` passes
 - [ ] Tested in a session started with `claude --plugin-dir plugins/<plugin-name>`
-- [ ] New plugins are listed in `.claude-plugin/marketplace.json`
+- [ ] New plugins are listed in `.claude-plugin/marketplace.json` and the README's Plugins table
 - [ ] `version` isn't set in `plugin.json` or the marketplace entry
 - [ ] Renamed plugins are added to the `renames` map in `marketplace.json`
 - [ ] Nothing private is included, since this repo is public

@@ -13,8 +13,8 @@ A public Claude Code plugin marketplace. See the "Add a plugin" section of
 ## Rules
 
 - Run `node scripts/validate.mjs` after changing a plugin, a manifest, or the script.
-- Every folder under `plugins/` needs an entry in `marketplace.json`, and each
-  local `source` must point to an existing folder.
+- Every folder under `plugins/` needs an entry in `marketplace.json` and a row in
+  the README's Plugins table, and each local `source` must point to an existing folder.
 - Don't set `version` in `plugin.json` or a marketplace entry. Users track commits
   for now. `metadata.version` describes the marketplace and is a separate field.
 - When renaming a plugin, add the old name to the `renames` map in `marketplace.json`,

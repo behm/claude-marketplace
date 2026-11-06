@@ -1,0 +1,7 @@
+{
+  "name": "marketplace-helper",
+  "description": "Add new plugins to a Claude Code plugin marketplace repository.",
+  "author": {
+    "name": "behm"
+  }
+}
