@@ -25,3 +25,7 @@ Claude Code prefixes each plugin skill's command with the plugin name.
 
 See the [Claude Code plugin documentation](https://code.claude.com/docs/en/plugins)
 for supported plugin components and marketplace details.
+
+## License
+
+[MIT](LICENSE)
