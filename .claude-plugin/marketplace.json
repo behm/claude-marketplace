@@ -12,6 +12,11 @@
       "name": "repo-guide",
       "source": "./plugins/repo-guide",
       "description": "Get oriented in an unfamiliar codebase."
+    },
+    {
+      "name": "marketplace-helper",
+      "source": "./plugins/marketplace-helper",
+      "description": "Add new plugins to a Claude Code plugin marketplace repository."
     }
   ]
 }

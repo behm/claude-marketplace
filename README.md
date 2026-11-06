@@ -4,16 +4,22 @@ A Claude Code plugin marketplace for plug-ins, skills, and other extensions.
 
 ## Install
 
-In Claude Code, add this marketplace and install the `repo-guide` plugin:
+In Claude Code, add this marketplace and install a plugin, such as `repo-guide`:
 
 ```text
 /plugin marketplace add behm/claude-marketplace
 /plugin install repo-guide@behm-claude-marketplace
 ```
 
-The plugin provides the `repo-guide` skill for getting oriented in an unfamiliar
-codebase. Ask Claude to use it or invoke it directly with `/repo-guide:repo-guide`.
-Claude Code prefixes each plugin skill's command with the plugin name.
+## Plugins
+
+| Plugin | What it does | Command |
+| --- | --- | --- |
+| `repo-guide` | Gets you oriented in an unfamiliar codebase | `/repo-guide:repo-guide` |
+| `marketplace-helper` | Adds a new plugin to a marketplace repository | `/marketplace-helper:add-plugin` |
+
+Ask Claude for what you need, or run the command directly. Claude Code prefixes each
+plugin skill's command with the plugin name.
 
 ## Get updates
 
@@ -32,6 +38,9 @@ marketplace, and select **Enable auto-update**.
 
 You'll need [Node.js](https://nodejs.org) and Claude Code. Changes reach `master`
 through pull requests, and the `Validate marketplace` check must pass before merging.
+
+The `marketplace-helper` plugin can do most of this for you. Either way, review what
+it creates and try the plugin before opening a pull request.
 
 1. Choose a kebab-case plugin name, such as `my-plugin`. It sets the install id
    (`my-plugin@behm-claude-marketplace`) and the prefix of its skill commands
@@ -77,7 +86,8 @@ through pull requests, and the `Validate marketplace` check must pass before mer
    claude --plugin-dir plugins/my-plugin
    ```
 
-7. Open a pull request and complete the checklist in the template.
+7. Add the plugin to the table under [Plugins](#plugins), then open a pull request
+   and complete the checklist in the template.
 
 See the [Claude Code plugin documentation](https://code.claude.com/docs/en/plugins)
 for supported plugin components and marketplace details.
