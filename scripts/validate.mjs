@@ -1,5 +1,6 @@
 #!/usr/bin/env node
-// Validates the marketplace and every plugin. Run from anywhere:
+// Validates the marketplace and every plugin, and runs each plugin's *.test.mjs
+// files. Run from anywhere:
 //   node scripts/validate.mjs
 //
 // `claude plugin validate` does not check that a plugin's `source` exists or
@@ -103,9 +104,27 @@ function runValidator(target) {
   }
 }
 
+function runTests() {
+  const tests = readdirSync(pluginsDir, { recursive: true })
+    .filter((path) => path.endsWith(".test.mjs"))
+    .map((path) => join(pluginsDir, path));
+  if (tests.length === 0) return;
+
+  console.log("Running plugin tests");
+  const result = spawnSync(process.execPath, ["--test", ...tests], {
+    cwd: root,
+    encoding: "utf8",
+  });
+  if (result.status !== 0) {
+    console.error(result.stdout, result.stderr);
+    problems.push("Plugin tests failed");
+  }
+}
+
 checkLayout();
 runValidator(root);
 pluginDirectories().forEach(runValidator);
+runTests();
 
 if (problems.length > 0) {
   console.error(`\nValidation failed:`);

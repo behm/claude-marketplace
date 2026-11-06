@@ -17,6 +17,11 @@
       "name": "marketplace-helper",
       "source": "./plugins/marketplace-helper",
       "description": "Add new plugins to a Claude Code plugin marketplace repository."
+    },
+    {
+      "name": "guardrails",
+      "source": "./plugins/guardrails",
+      "description": "Stop Claude from force pushing, committing to the default branch, or editing .env files."
     }
   ]
 }
