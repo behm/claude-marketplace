@@ -1,0 +1,17 @@
+schema_version: "1.1"
+name: ignores-unrelated-question
+tags: [trigger]
+execution:
+  prompt: Write a JavaScript regex that matches an ISO 8601 date. Just give me the regex.
+  max_turns: 15
+  allowed_tools: [Read, Glob, Grep, Skill]
+context:
+  scaffold_script: setup.sh
+graders:
+  - name: skill-not-used
+    type: tool_used
+    tool: Skill
+    input_match: '"skill"\s*:\s*"(?:[\w-]+:)?repo-guide"'
+    min: 0
+    max: 0
+    arm: both

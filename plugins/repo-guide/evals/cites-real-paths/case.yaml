@@ -1,0 +1,33 @@
+schema_version: "1.1"
+name: cites-real-paths
+tags: [quality]
+execution:
+  prompt: Walk me through this codebase. Where does the code start, and how do I run the tests?
+  max_turns: 15
+  allowed_tools: [Read, Glob, Grep, Skill]
+context:
+  scaffold_script: setup.sh
+graders:
+  - name: cites-entry-point
+    type: regex
+    pattern: 'src/cli\.js'
+    match: contains
+  - name: cites-store
+    type: regex
+    pattern: 'src/store\.js'
+    match: contains
+  - name: cites-tests
+    type: regex
+    pattern: 'test/store\.test\.js|npm test|node --test'
+    match: contains
+  - name: names-real-symbols
+    type: llm
+    criteria: |
+      These are the repository's only files: package.json, README.md, src/cli.js,
+      src/store.js, and test/store.test.js. Its own functions are addNote and
+      listNotes. It also uses the environment variable TINY_NOTES_FILE, the default
+      notes.txt, and Node.js built-ins such as appendFileSync.
+
+      Pass only if the reply names at least one of addNote or listNotes, and every
+      file and function it presents as part of the repository is one of these. Don't
+      fail a reply for mentioning details that are in this list.

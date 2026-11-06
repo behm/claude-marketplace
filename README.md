@@ -118,6 +118,40 @@ it creates and try the plugin before opening a pull request.
 See the [Claude Code plugin documentation](https://code.claude.com/docs/en/plugins)
 for supported plugin components and marketplace details.
 
+## Test a plugin with evals
+
+Validation checks a plugin's files. Evals check how it behaves, by running real Claude
+sessions and scoring the results. A plugin's cases live in `plugins/<plugin-name>/evals/`.
+
+Evals use your Claude account and take a few minutes, so they don't run in CI. Run them
+yourself when you change a skill, and mention the result in your pull request. For
+`repo-guide`, each of these commands cost about $1 on Sonnet. The first run asks you to
+trust the plugin.
+
+To check when the skill is used, and when it isn't:
+
+```text
+claude plugin eval plugins/repo-guide --tag trigger --ablation none --allow-tools Write Edit --scaffold --model sonnet --no-publish --max-cost-usd 5
+```
+
+To compare its answers with Claude's answers without the plugin:
+
+```text
+claude plugin eval plugins/repo-guide --tag quality --allow-tools Write Edit --scaffold --model sonnet --no-publish --max-cost-usd 5
+```
+
+These flags matter:
+
+- `--ablation none` skips the run without the plugin, which otherwise leaves skill use
+  out of the score.
+- `--allow-tools Write Edit` makes those tools available, so that the read-only check
+  can fail. Bash stays off, so that check doesn't see changes made through a shell.
+- `--scaffold` runs each case's `setup.sh`, which creates the sample repository. It
+  runs on your machine, so only use it with cases you trust.
+
+See [Test plugins with evals](https://code.claude.com/docs/en/plugin-evals) for the case
+format.
+
 ## License
 
 [MIT](LICENSE)

@@ -1,0 +1,14 @@
+schema_version: "1.1"
+name: triggers-walkthrough
+tags: [trigger]
+execution:
+  prompt: Can you walk me through this codebase?
+  max_turns: 15
+  allowed_tools: [Read, Glob, Grep, Skill]
+context:
+  scaffold_script: setup.sh
+graders:
+  - name: skill-used
+    type: tool_used
+    tool: Skill
+    input_match: '"skill"\s*:\s*"(?:[\w-]+:)?repo-guide"'
