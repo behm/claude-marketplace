@@ -1,0 +1,7 @@
+{
+  "name": "guardrails",
+  "description": "Stop Claude from force pushing, committing to the default branch, or editing .env files.",
+  "author": {
+    "name": "behm"
+  }
+}

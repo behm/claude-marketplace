@@ -7,7 +7,8 @@ A public Claude Code plugin marketplace. See the "Add a plugin" section of
 
 - `.claude-plugin/marketplace.json`: the catalog of plugins users can install
 - `plugins/<plugin-name>/`: one plugin, with its manifest at `.claude-plugin/plugin.json`
-- `scripts/validate.mjs`: all validation, used both locally and in CI
+- `scripts/validate.mjs`: all validation and plugin tests (`*.test.mjs`), used both
+  locally and in CI
 - `.github/workflows/validate.yml`: runs the `Validate marketplace` check
 
 ## Rules

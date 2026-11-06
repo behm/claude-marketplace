@@ -17,9 +17,35 @@ In Claude Code, add this marketplace and install a plugin, such as `repo-guide`:
 | --- | --- | --- |
 | `repo-guide` | Gets you oriented in an unfamiliar codebase | `/repo-guide:repo-guide` |
 | `marketplace-helper` | Adds a new plugin to a marketplace repository | `/marketplace-helper:add-plugin` |
+| `guardrails` | Stops Claude from force pushing, committing to the default branch, or editing `.env` files | None, it runs automatically |
 
 Ask Claude for what you need, or run the command directly. Claude Code prefixes each
 plugin skill's command with the plugin name.
+
+### About `guardrails`
+
+The hook runs before Claude Code's permission prompt, so an allow rule doesn't get
+past it. It needs [Node.js](https://nodejs.org). It blocks Claude from:
+
+- Force pushing, including `--force-with-lease`
+- Committing on `main`, `master`, or the branch `origin` marks as default
+- Editing `.env` and `.env.*` files, but not templates such as `.env.example`
+
+When you do want one of these, run it yourself in your own terminal, or turn the
+plugin off:
+
+```text
+claude plugin disable guardrails@behm-claude-marketplace
+```
+
+It catches mistakes, but it isn't a security boundary:
+
+- It reads command text, so scripts, aliases, and tools like `xargs` can get past it.
+- It doesn't stop Claude from reading `.env` files, or changing them with other
+  commands such as `cp` or `sed`.
+- It doesn't cover other ways of changing the default branch, such as `git merge`.
+  Use branch protection on the server for that.
+- If the hook fails or Node.js is missing, the action goes ahead.
 
 ## Get updates
 
