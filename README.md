@@ -11,8 +11,9 @@ In Claude Code, add this marketplace and install the `repo-guide` plugin:
 /plugin install repo-guide@behm-claude-marketplace
 ```
 
-The plugin provides the `/repo-guide` skill for getting oriented in an unfamiliar
-codebase. Ask Claude to use it or invoke it directly with `/repo-guide`.
+The plugin provides the `repo-guide` skill for getting oriented in an unfamiliar
+codebase. Ask Claude to use it or invoke it directly with `/repo-guide:repo-guide`.
+Claude Code prefixes each plugin skill's command with the plugin name.
 
 ## Add a plugin
 
@@ -22,5 +23,5 @@ codebase. Ask Claude to use it or invoke it directly with `/repo-guide`.
    directory as the relative `source`.
 4. Validate the JSON files and test the plugin in Claude Code before submitting.
 
-See the [Claude Code plugin documentation](https://docs.anthropic.com/en/docs/claude-code/plugins)
+See the [Claude Code plugin documentation](https://code.claude.com/docs/en/plugins)
 for supported plugin components and marketplace details.
