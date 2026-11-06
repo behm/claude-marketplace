@@ -1,0 +1,2 @@
+# Bash fails on CRLF line endings, including in eval fixtures on Windows.
+*.sh text eol=lf

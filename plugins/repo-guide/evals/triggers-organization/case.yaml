@@ -1,0 +1,14 @@
+schema_version: "1.1"
+name: triggers-organization
+tags: [trigger]
+execution:
+  prompt: How is this repo organized?
+  max_turns: 15
+  allowed_tools: [Read, Glob, Grep, Skill]
+context:
+  scaffold_script: setup.sh
+graders:
+  - name: skill-used
+    type: tool_used
+    tool: Skill
+    input_match: '"skill"\s*:\s*"(?:[\w-]+:)?repo-guide"'

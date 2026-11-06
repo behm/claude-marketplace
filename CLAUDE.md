@@ -10,10 +10,13 @@ A public Claude Code plugin marketplace. See the "Add a plugin" section of
 - `scripts/validate.mjs`: all validation and plugin tests (`*.test.mjs`), used both
   locally and in CI
 - `.github/workflows/validate.yml`: runs the `Validate marketplace` check
+- `plugins/<plugin-name>/evals/`: eval cases, run manually (see `README.md`)
 
 ## Rules
 
 - Run `node scripts/validate.mjs` after changing a plugin, a manifest, or the script.
+- If a skill with evals changes, run them. They cost money, so don't add them to CI
+  or run them for other changes without asking.
 - Every folder under `plugins/` needs an entry in `marketplace.json` and a row in
   the README's Plugins table, and each local `source` must point to an existing folder.
 - Don't set `version` in `plugin.json` or a marketplace entry. Users track commits

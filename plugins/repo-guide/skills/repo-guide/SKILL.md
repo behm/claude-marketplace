@@ -1,6 +1,6 @@
 ---
 name: repo-guide
-description: Explore an unfamiliar codebase and explain its structure, key entry points, and how to validate changes.
+description: Explore an unfamiliar codebase and explain its structure, key entry points, and how to run its tests and validate changes. Use when someone is new to a repository or asks where to start, how it's organized, to be walked through it, or how to run its tests. Don't use for questions about a single known function or file, for general programming questions, or when asked to make a change.
 ---
 
 # Repository guide
