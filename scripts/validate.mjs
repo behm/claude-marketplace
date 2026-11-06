@@ -14,6 +14,10 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const pluginsDir = join(root, "plugins");
 const problems = [];
 
+// Warnings fail validation, as with `claude plugin validate --strict`, except
+// this one: plugins omit `version` on purpose so users track commits.
+const ALLOWED_WARNING = /^No version specified\./;
+
 function pluginDirectories() {
   if (!existsSync(pluginsDir)) return [];
   return readdirSync(pluginsDir, { withFileTypes: true })
@@ -57,17 +61,44 @@ function checkLayout() {
 
 function runValidator(target) {
   const label = relative(root, target).replaceAll("\\", "/") || ".";
-  console.log(`\nValidating ${label}`);
+  console.log(`Validating ${label}`);
 
-  const result = spawnSync("claude", ["plugin", "validate", target, "--strict"], {
-    stdio: "inherit",
+  const result = spawnSync("claude", ["plugin", "validate", label, "--json"], {
+    cwd: root,
+    encoding: "utf8",
     // npm installs `claude` as a .cmd shim on Windows, which needs a shell.
     shell: process.platform === "win32",
   });
 
   if (result.error) {
     problems.push(`Could not run claude: ${result.error.message}`);
-  } else if (result.status !== 0) {
+    return;
+  }
+
+  let report;
+  try {
+    report = JSON.parse(result.stdout);
+  } catch {
+    problems.push(
+      `Could not read validator output for ${label}: ${result.stderr || result.stdout}`,
+    );
+    return;
+  }
+
+  const before = problems.length;
+  for (const file of [report.manifest, ...(report.contents ?? [])]) {
+    if (!file) continue;
+    for (const { path, message } of file.errors ?? []) {
+      problems.push(`${label}: ${path}: ${message}`);
+    }
+    for (const { path, message } of file.warnings ?? []) {
+      if (!ALLOWED_WARNING.test(message)) {
+        problems.push(`${label}: ${path}: ${message}`);
+      }
+    }
+  }
+
+  if (result.status !== 0 && problems.length === before) {
     problems.push(`claude plugin validate failed for ${label}`);
   }
 }
@@ -82,4 +113,4 @@ if (problems.length > 0) {
   process.exit(1);
 }
 
-console.log("\nAll checks passed.");
+console.log("All checks passed.");

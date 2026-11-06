@@ -11,8 +11,7 @@
     {
       "name": "repo-guide",
       "source": "./plugins/repo-guide",
-      "description": "Get oriented in an unfamiliar codebase.",
-      "version": "1.0.0"
+      "description": "Get oriented in an unfamiliar codebase."
     }
   ]
 }
