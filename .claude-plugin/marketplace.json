@@ -10,7 +10,7 @@
   "plugins": [
     {
       "name": "repo-guide",
-      "source": "./plugins/repo-guide",
+      "source": "./plugins/does-not-exist",
       "description": "Get oriented in an unfamiliar codebase.",
       "version": "1.0.0"
     }
