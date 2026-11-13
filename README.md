@@ -47,6 +47,24 @@ It catches mistakes, but it isn't a security boundary:
   Use branch protection on the server for that.
 - If the hook fails or Node.js is missing, the action goes ahead.
 
+### About `test-runner`
+
+This plugin shows how a plugin ships a subagent. The agent lives in
+`plugins/test-runner/agents/test-runner.md`: its frontmatter sets its name, when to
+use it, its tools, and its model, and the rest of the file is its system prompt.
+
+The agent runs in its own context window, so long test output stays there and
+only a short summary comes back to your conversation. It uses Haiku to keep costs
+down, and it can read files and run commands but not edit files.
+
+You can use it in three ways:
+
+- Run `/test-runner:run-tests`, optionally with test files or names.
+- Mention it with `@`, or ask Claude to use the test-runner agent.
+- Ask Claude to run the tests, and Claude may hand the work to the agent on its own.
+
+Run `/agents` to see it listed with the other agents available in your session.
+
 ## Get updates
 
 Plugins here don't set a version, so an update gives you the latest commit. Any
@@ -85,7 +103,8 @@ it creates and try the plugin before opening a pull request.
    }
    ```
 
-3. Add components, such as a skill at `plugins/my-plugin/skills/<skill-name>/SKILL.md`.
+3. Add components, such as a skill at `plugins/my-plugin/skills/<skill-name>/SKILL.md`
+   or a subagent at `plugins/my-plugin/agents/<agent-name>.md`.
    The skill's `description` should say what it does and when to use it, because
    Claude uses it to decide when to load the skill.
 4. Add an entry to `plugins` in `.claude-plugin/marketplace.json`, also without
