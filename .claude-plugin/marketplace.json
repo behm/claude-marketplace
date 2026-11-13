@@ -22,6 +22,11 @@
       "name": "guardrails",
       "source": "./plugins/guardrails",
       "description": "Stop Claude from force pushing, committing to the default branch, or editing .env files."
+    },
+    {
+      "name": "test-runner",
+      "source": "./plugins/test-runner",
+      "description": "Run the project's tests in a subagent and get back only what failed and why."
     }
   ]
 }

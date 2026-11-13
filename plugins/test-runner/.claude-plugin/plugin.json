@@ -1,0 +1,7 @@
+{
+  "name": "test-runner",
+  "description": "Run the project's tests in a subagent and get back only what failed and why.",
+  "author": {
+    "name": "behm"
+  }
+}
