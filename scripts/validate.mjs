@@ -4,7 +4,8 @@
 //   node scripts/validate.mjs
 //
 // `claude plugin validate` does not check that a plugin's `source` exists or
-// that every folder under plugins/ is listed, so those checks are done here.
+// that every folder under plugins/ is listed in marketplace.json and the
+// README, so those checks are done here.
 
 import { spawnSync } from "node:child_process";
 import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
@@ -52,10 +53,22 @@ function checkLayout() {
     }
   }
 
+  // Rows in the README's Plugins table start with the plugin name in backticks.
+  const readme = readFileSync(join(root, "README.md"), "utf8");
+  const tableRows = new Set(
+    readme
+      .split(/\r?\n/)
+      .map((line) => line.match(/^\|\s*`([^`]+)`\s*\|/)?.[1])
+      .filter(Boolean),
+  );
+
   for (const directory of pluginDirectories()) {
+    const path = relative(root, directory).replaceAll("\\", "/");
     if (!listed.has(directory)) {
-      const path = relative(root, directory).replaceAll("\\", "/");
       problems.push(`${path} is not listed in marketplace.json`);
+    }
+    if (!tableRows.has(relative(pluginsDir, directory))) {
+      problems.push(`${path} has no row in the README's Plugins table`);
     }
   }
 }

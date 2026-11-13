@@ -18,6 +18,7 @@ In Claude Code, add this marketplace and install a plugin, such as `repo-guide`:
 | `repo-guide` | Gets you oriented in an unfamiliar codebase | `/repo-guide:repo-guide` |
 | `marketplace-helper` | Adds a new plugin to a marketplace repository | `/marketplace-helper:add-plugin` |
 | `guardrails` | Stops Claude from force pushing, committing to the default branch, or editing `.env` files | None, it runs automatically |
+| `test-runner` | Runs your tests in a subagent and reports only what failed and why | `/test-runner:run-tests` |
 
 Ask Claude for what you need, or run the command directly. Claude Code prefixes each
 plugin skill's command with the plugin name.
