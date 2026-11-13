@@ -58,11 +58,30 @@ The agent runs in its own context window, so long test output stays there and
 only a short summary comes back to your conversation. It uses Haiku to keep costs
 down, and it can read files and run commands but not edit files.
 
+Install it like any other plugin from this marketplace:
+
+```text
+/plugin install test-runner@behm-claude-marketplace
+```
+
 You can use it in three ways:
 
-- Run `/test-runner:run-tests`, optionally with test files or names.
+- Run `/test-runner:run-tests`.
 - Mention it with `@`, or ask Claude to use the test-runner agent.
 - Ask Claude to run the tests, and Claude may hand the work to the agent on its own.
+
+On its own, `/test-runner:run-tests` runs the project's whole test suite. To run
+only some tests, add what you want after the command, in your own words. It can
+be a file, a folder, a test name, or a description, and the agent works out the
+matching command:
+
+```text
+/test-runner:run-tests
+/test-runner:run-tests src/auth.test.js
+/test-runner:run-tests tests/integration
+/test-runner:run-tests "rejects an expired token"
+/test-runner:run-tests just the parser tests
+```
 
 Run `/agents` to see it listed with the other agents available in your session.
 

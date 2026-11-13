@@ -1,7 +1,7 @@
 ---
 name: run-tests
 description: Run the project's tests through the test-runner subagent and summarize what failed. Use when the user runs /test-runner:run-tests or asks to run the tests with the test runner.
-argument-hint: "[optional test files or names]"
+argument-hint: "[file, folder, or test name; blank runs all tests]"
 ---
 
 # Run tests
